@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}HTML/Markdown Converter{% endblock %}
+
+{% block content %}
+
+    <div class="converter-section">
+        <h2>HTML to Markdown</h2>
+        <form method="post">
+            <label for="html_input">HTML Input:</label><br>
+            <textarea id="html_input" name="html_input" rows="10" cols="80">{{ request.form.get('html_input') or '' }}</textarea><br>
+            <input type="submit" value="Convert HTML to Markdown">
+        </form>
+        {% if markdown_result %}
+            <h3>Markdown Output:</h3>
+            <pre>{{ markdown_result }}</pre>
+        {% endif %}
+    </div>
+
+    <hr>
+
+    <div class="converter-section">
+        <h2>Markdown to HTML</h2>
+        <form method="post">
+            <label for="markdown_input">Markdown Input:</label><br>
+            <textarea id="markdown_input" name="markdown_input" rows="10" cols="80">{{ request.form.get('markdown_input') or '' }}</textarea><br>
+            <input type="submit" value="Convert Markdown to HTML">
+        </form>
+        {% if html_result %}
+            <h3>HTML Output:</h3>
+            <div class="html-output">{{ html_result | safe }}</div>
+        {% endif %}
+    </div>
+{% endblock %}
